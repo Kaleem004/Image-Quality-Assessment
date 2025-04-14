@@ -1,4 +1,3 @@
-from turtle import st
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 import numpy as np
@@ -7,6 +6,7 @@ import os
 from tensorflow.keras.models import load_model
 from PIL import Image
 import cv2
+import uvicorn
 
 # Create FastAPI app
 app = FastAPI()
@@ -14,7 +14,6 @@ app = FastAPI()
 # Load trained CNN model
 model_path = "model.h5"  # Change if your model name is different
 model = load_model(model_path, compile=False)
-
 
 # Create a temp directory for uploaded images
 os.makedirs("temp", exist_ok=True)
@@ -54,3 +53,5 @@ async def predict(file: UploadFile = File(...)):
         "Quality": classification
     }
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
