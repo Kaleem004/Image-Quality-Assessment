@@ -18,7 +18,6 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    // Build with unique tags
                     sh "docker build -t ${DOCKER_ID}/${DOCKER_IMAGE_API}:${IMAGE_TAG} -f Dockerfile.api ."
                     sh "docker build -t ${DOCKER_ID}/${DOCKER_IMAGE_STREAMLIT}:${IMAGE_TAG} -f Dockerfile.streamlit ."
                 }
@@ -28,7 +27,6 @@ pipeline {
         stage('Run with Docker Compose') {
             steps {
                 script {
-                    // Update docker-compose to use correct tags if needed
                     sh 'docker-compose down || true'
                     sh 'docker-compose up -d --build'
                 }
@@ -38,9 +36,16 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
-                        sh "docker push ${DOCKER_ID}/${DOCKER_IMAGE_API}:${IMAGE_TAG}"
-                        sh "docker push ${DOCKER_ID}/${DOCKER_IMAGE_STREAMLIT}:${IMAGE_TAG}"
+                    withCredentials([usernamePassword(
+                        credentialsId: 'docker-hub', 
+                        usernameVariable: 'DOCKERHUB_USERNAME', 
+                        passwordVariable: 'DOCKERHUB_PASSWORD'
+                    )]) {
+                        sh '''
+                            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+                            docker push ${DOCKER_ID}/${DOCKER_IMAGE_API}:${IMAGE_TAG}
+                            docker push ${DOCKER_ID}/${DOCKER_IMAGE_STREAMLIT}:${IMAGE_TAG}
+                        '''
                     }
                 }
             }
