@@ -8,7 +8,7 @@ from PIL import Image
 import cv2
 import uvicorn
 
-# Create FastAPI app
+# Create FastAPI app.
 app = FastAPI()
 
 # Load trained CNN model
