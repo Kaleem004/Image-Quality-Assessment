@@ -1,10 +1,37 @@
+# version: '3.8'
+
+# services:
+#   fastapi:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.api
+#     container_name: fastapi-container
+#     ports:
+#       - "8000:8000"
+#     networks:
+#       - mynetwork
+
+#   streamlit:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile.streamlit
+#     container_name: streamlit-container
+#     ports:
+#       - "8501:8501"
+#     networks:
+#       - mynetwork
+#     depends_on:
+#       - fastapi
+
+# networks:
+#   mynetwork:
+#     driver: bridge
+
 version: '3.8'
 
 services:
   fastapi:
-    build:
-      context: .
-      dockerfile: Dockerfile.api
+    image: rohitsontamu/iqa-cicd-api:${IMAGE_TAG}
     container_name: fastapi-container
     ports:
       - "8000:8000"
@@ -12,9 +39,7 @@ services:
       - mynetwork
 
   streamlit:
-    build:
-      context: .
-      dockerfile: Dockerfile.streamlit
+    image: rohitsontamu/iqa-cicd-streamlit:${IMAGE_TAG}
     container_name: streamlit-container
     ports:
       - "8501:8501"
@@ -26,3 +51,4 @@ services:
 networks:
   mynetwork:
     driver: bridge
+
