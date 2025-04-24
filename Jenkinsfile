@@ -15,14 +15,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Images') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_ID}/${DOCKER_IMAGE_API}:${IMAGE_TAG} -f Dockerfile.api ."
-                    sh "docker build -t ${DOCKER_ID}/${DOCKER_IMAGE_STREAMLIT}:${IMAGE_TAG} -f Dockerfile.streamlit ."
-                }
-            }
-        }
+        
 
         stage('Run with Docker Compose') {
             steps {
