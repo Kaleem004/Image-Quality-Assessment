@@ -54,10 +54,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ CI/CD pipeline completed successfully!'
+            echo ' CI/CD pipeline completed successfully!'
         }
         failure {
-            echo '❌ CI/CD pipeline failed.'
+            echo ' CI/CD pipeline failed.'
         }
     }
 }
