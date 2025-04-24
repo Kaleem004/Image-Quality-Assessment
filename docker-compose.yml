@@ -1,31 +1,5 @@
-# version: '3.8'
-
-# services:
-#   fastapi:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile.api
-#     container_name: fastapi-container
-#     ports:
-#       - "8000:8000"
-#     networks:
-#       - mynetwork
-
-#   streamlit:
-#     build:
-#       context: .
-#       dockerfile: Dockerfile.streamlit
-#     container_name: streamlit-container
-#     ports:
-#       - "8501:8501"
-#     networks:
-#       - mynetwork
-#     depends_on:
-#       - fastapi
-
-# networks:
-#   mynetwork:
-#     driver: bridge
+# This is a Docker Compose file for deploying a FastAPI and Streamlit application.
+# It defines two services: fastapi and streamlit, each with its own container.
 
 version: '3.8'
 
