@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Rohitsontamu/Image-quality-assessment-cnn.git'
+                git branch: 'main', url: 'https://github.com/Kaleem004/Image-Quality-Assessment.git'
             }
         }
 
