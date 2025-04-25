@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_ID = "rohitsontamu"
+        DOCKER_ID = "mohammedkaleem"
         DOCKER_IMAGE_API = "iqa-cicd-api"
         DOCKER_IMAGE_STREAMLIT = "iqa-cicd-streamlit"
         IMAGE_TAG = "${BUILD_ID}"
